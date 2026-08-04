@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>지호연 | Data-Centric AI Portfolio</title>
+<meta name="description" content="빅데이터응용학과 지호연 — 데이터 수집부터 학습 데이터 구축, 예측 신뢰도 보정까지.">
+
+<!--
+  ┌──────────────────────────────────────────────────────────────┐
+  │  수정 방법                                                    │
+  │  1. 파일에서 "TODO" 를 검색하면 채워야 할 곳이 전부 나옵니다.  │
+  │  2. 노란 점선 박스로 표시된 부분이 화면에서도 보입니다.        │
+  │  3. 다 채운 뒤에는 .todo 관련 CSS를 지워도 됩니다.            │
+  └──────────────────────────────────────────────────────────────┘
+-->
+
+<style>
+:root{
+  --bg:#fbfbfa; --surface:#ffffff; --line:#e6e4e0;
+  --text:#1c1b1a; --muted:#6b6864; --faint:#98948e;
+  --accent:#2f5d62; --accent-soft:#e8f0f0;
+  --warn-bg:#fdf6e3; --warn-line:#d9c48a; --warn-text:#7a6320;
+  --max:820px;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#131413; --surface:#1b1d1c; --line:#2e312f;
+    --text:#eceae7; --muted:#a4a09a; --faint:#75716c;
+    --accent:#7fb3b3; --accent-soft:#1e2c2c;
+    --warn-bg:#2a2415; --warn-line:#6b5a2a; --warn-text:#d4bd76;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131413; --surface:#1b1d1c; --line:#2e312f;
+  --text:#eceae7; --muted:#a4a09a; --faint:#75716c;
+  --accent:#7fb3b3; --accent-soft:#1e2c2c;
+  --warn-bg:#2a2415; --warn-line:#6b5a2a; --warn-text:#d4bd76;
+}
+:root[data-theme="light"]{
+  --bg:#fbfbfa; --surface:#ffffff; --line:#e6e4e0;
+  --text:#1c1b1a; --muted:#6b6864; --faint:#98948e;
+  --accent:#2f5d62; --accent-soft:#e8f0f0;
+  --warn-bg:#fdf6e3; --warn-line:#d9c48a; --warn-text:#7a6320;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:70px}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Pretendard","Malgun Gothic",sans-serif;
+  line-height:1.75; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
+
+/* ── nav ── */
+nav{
+  position:sticky; top:0; z-index:50;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+nav .wrap{display:flex; align-items:center; gap:8px; height:56px}
+nav .brand{font-weight:700; letter-spacing:-.02em; margin-right:auto}
+nav a{
+  color:var(--muted); text-decoration:none; font-size:.86rem;
+  padding:6px 10px; border-radius:6px;
+}
+nav a:hover{color:var(--text); background:var(--accent-soft)}
+#themeBtn{
+  background:none; border:1px solid var(--line); color:var(--muted);
+  width:32px; height:32px; border-radius:8px; cursor:pointer; font-size:.9rem;
+  display:grid; place-items:center; flex-shrink:0;
+}
+#themeBtn:hover{color:var(--text); border-color:var(--accent)}
+@media(max-width:640px){ nav .nav-links{display:none} }
+
+/* ── sections ── */
+section{padding:72px 0; border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:none}
+h2{
+  font-size:.78rem; text-transform:uppercase; letter-spacing:.14em;
+  color:var(--accent); font-weight:700; margin:0 0 28px;
+}
+h3{font-size:1.35rem; letter-spacing:-.02em; margin:0 0 10px; line-height:1.4}
+h4{font-size:1rem; margin:0 0 8px; letter-spacing:-.01em}
+p{margin:0 0 16px; color:var(--muted)}
+p.lead{color:var(--text)}
+a{color:var(--accent)}
+
+/* ── hero ── */
+header{padding:96px 0 72px; border-bottom:1px solid var(--line)}
+header .eyebrow{
+  font-size:.78rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--faint); margin-bottom:20px;
+}
+header h1{
+  font-size:clamp(2rem,5.5vw,3rem); line-height:1.25;
+  letter-spacing:-.035em; margin:0 0 20px; font-weight:700;
+}
+header h1 em{font-style:normal; color:var(--accent)}
+header .sub{font-size:1.05rem; color:var(--muted); max-width:600px; margin:0 0 32px}
+.links{display:flex; gap:10px; flex-wrap:wrap}
+.links a{
+  display:inline-flex; align-items:center; gap:7px;
+  padding:9px 16px; border:1px solid var(--line); border-radius:999px;
+  text-decoration:none; color:var(--text); font-size:.88rem; background:var(--surface);
+  transition:border-color .15s, transform .15s;
+}
+.links a:hover{border-color:var(--accent); transform:translateY(-1px)}
+
+/* ── research interests ── */
+.ri{display:grid; gap:2px}
+.ri > div{padding:20px 0; border-top:1px solid var(--line)}
+.ri > div:first-child{border-top:none; padding-top:0}
+.ri h4{color:var(--text)}
+.ri p{margin:0; font-size:.94rem}
+
+/* ── featured project ── */
+.feat{
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:14px; padding:36px; margin-top:4px;
+}
+@media(max-width:640px){ .feat{padding:24px 20px} }
+.badge{
+  display:inline-block; background:var(--accent); color:#fff;
+  font-size:.72rem; font-weight:700; letter-spacing:.06em;
+  padding:4px 11px; border-radius:999px; margin-bottom:14px;
+}
+.meta{
+  display:grid; grid-template-columns:auto 1fr; gap:6px 20px;
+  font-size:.88rem; margin:24px 0 32px;
+  padding:20px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+}
+.meta dt{color:var(--faint); white-space:nowrap}
+.meta dd{margin:0; color:var(--text)}
+
+.step{padding:24px 0; border-top:1px solid var(--line)}
+.step:first-of-type{border-top:none; padding-top:0}
+.step .num{
+  font-size:.72rem; font-weight:700; color:var(--accent);
+  letter-spacing:.1em; display:block; margin-bottom:6px;
+}
+.step p:last-child{margin-bottom:0}
+.star{color:var(--accent); font-size:.8em; vertical-align:2px}
+
+/* 담당 / 팀 구분 배지 */
+.tag-mine,.tag-team{
+  display:inline-block; font-size:.68rem; font-weight:700;
+  padding:2px 9px; border-radius:999px; margin-left:8px;
+  letter-spacing:.04em; vertical-align:2px;
+}
+.tag-mine{background:var(--accent); color:#fff}
+.tag-team{background:transparent; color:var(--faint); border:1px solid var(--line); font-weight:600}
+.tag-solo{
+  display:inline-block; font-size:.68rem; font-weight:700;
+  padding:2px 9px; border-radius:999px; margin-left:8px;
+  letter-spacing:.04em; vertical-align:2px;
+  background:var(--accent); color:#fff;
+}
+.tag-teamproj{
+  display:inline-block; font-size:.68rem; font-weight:600;
+  padding:2px 9px; border-radius:999px; margin-left:8px;
+  letter-spacing:.04em; vertical-align:2px;
+  background:transparent; color:var(--faint); border:1px solid var(--line);
+}
+.tag-joint{
+  display:inline-block; font-size:.68rem; font-weight:700;
+  padding:2px 9px; border-radius:999px; margin-left:8px;
+  letter-spacing:.04em; vertical-align:2px;
+  background:var(--accent-soft); color:var(--accent); border:1px solid var(--accent);
+}
+
+.note{
+  background:var(--accent-soft); border-left:3px solid var(--accent);
+  padding:14px 18px; border-radius:0 8px 8px 0; margin:16px 0 0;
+}
+.note p{margin:0; font-size:.92rem; color:var(--text)}
+.note strong{color:var(--accent)}
+
+table{width:100%; border-collapse:collapse; margin:16px 0 0; font-size:.9rem}
+th,td{padding:10px 12px; text-align:left; border-bottom:1px solid var(--line)}
+th{color:var(--faint); font-weight:600; font-size:.8rem; letter-spacing:.04em}
+td:not(:first-child){font-variant-numeric:tabular-nums}
+.tbl-scroll{overflow-x:auto}
+
+/* ── other projects ── */
+.cards{display:grid; gap:14px}
+.card{
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:12px; padding:24px;
+  transition:border-color .15s;
+}
+.card:hover{border-color:var(--accent)}
+.card h4{font-size:1.05rem; margin-bottom:10px}
+.card p{font-size:.93rem; margin-bottom:12px}
+.card p:last-of-type{margin-bottom:0}
+.card .k{color:var(--text); font-weight:600}
+
+.tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:14px}
+.tag{
+  font-size:.75rem; padding:3px 9px; border-radius:5px;
+  background:var(--accent-soft); color:var(--accent); font-weight:500;
+}
+
+/* ── skills ── */
+.skill-group{margin-bottom:28px}
+.skill-group:last-child{margin-bottom:0}
+.skill-label{
+  font-size:.85rem; font-weight:700; margin-bottom:4px; color:var(--text);
+}
+.skill-label span{font-weight:400; color:var(--faint); font-size:.8rem}
+.skill-row{display:grid; grid-template-columns:130px 1fr; gap:4px 16px; padding:9px 0; border-top:1px solid var(--line); font-size:.9rem}
+.skill-row .cat{color:var(--faint); font-size:.83rem}
+@media(max-width:560px){ .skill-row{grid-template-columns:1fr; gap:2px} }
+
+/* ── education ── */
+.edu-item{padding:16px 0; border-top:1px solid var(--line)}
+.edu-item:first-child{border-top:none; padding-top:0}
+.edu-item p{margin:0; font-size:.93rem}
+.edu-item .t{color:var(--text); font-weight:600; margin-bottom:4px}
+
+/* ── contact ── */
+footer{padding:64px 0 80px; text-align:center}
+footer p{font-size:.85rem; color:var(--faint)}
+
+/* ── TODO placeholder ── */
+.todo{
+  display:inline-block; background:var(--warn-bg); color:var(--warn-text);
+  border:1px dashed var(--warn-line); border-radius:6px;
+  padding:2px 9px; font-size:.85rem; font-weight:500;
+}
+.todo-block{
+  display:block; background:var(--warn-bg); color:var(--warn-text);
+  border:1px dashed var(--warn-line); border-radius:8px;
+  padding:14px 18px; font-size:.88rem; margin:12px 0 0; line-height:1.6;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="brand">지호연</span>
+    <span class="nav-links">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#featured">Project</a>
+      <a href="#projects">More</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+    </span>
+    <button id="themeBtn" aria-label="테마 전환">◐</button>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">빅데이터응용학과 3학년 · Data-Centric AI</div>
+    <h1>모델보다<br><em>데이터를 먼저 의심합니다.</em></h1>
+    <p class="sub">
+      데이터 수집부터 학습 데이터 구축, 그리고 예측 신뢰도 보정까지 —
+      AI가 학습할 수 있는 형태로 데이터를 만드는 일에 관심이 있습니다.
+    </p>
+    <div class="links">
+      <a href="https://github.com/PR-log" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:jeeheen1@gmail.com">Email</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <h2>About</h2>
+    <p class="lead">
+      데이터를 모아 분석하는 것을 넘어, <strong>AI가 바로 학습할 수 있는 형태로 가공하는 과정</strong>에 관심이 있습니다.
+    </p>
+    <p>
+      생성형 AI와 LLM이 빠르게 발전할수록 모델의 실제 성능은 결국 학습 데이터의 품질이 결정한다는 것을
+      프로젝트를 진행하며 체감했습니다. 그래서 Data-Centric AI 관점에서 정교한 전처리와 데이터셋 구조화를 계속 공부해 왔습니다.
+    </p>
+    <p>
+      94만 건 규모의 정형 데이터를 전처리하고 예측 모델을 학습시켰으며,
+      Ubuntu / GPU 환경에서 학습 파이프라인을 구성하는 과정을 경험했습니다.
+      팀 프로젝트에서 확률 보정 도입을 함께 논의하며 <strong>정확도 지표가 좋아도 예측 확률 자체를 신뢰할 수 없으면
+      실무에 쓸 수 없다</strong>는 것을 알게 됐고, 이후로는 성능뿐 아니라 결과의 신뢰도를 함께 보려 합니다.
+    </p>
+    <p>
+      AI 결과물 뒤에 있는 고된 전처리 과정을 알기에, 눈에 잘 띄지 않는 데이터 품질 작업을
+      끝까지 파고드는 연구자가 되고 싶습니다.
+    </p>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <h2>Research Interests</h2>
+    <div class="ri">
+      <div>
+        <h4>Data-Centric AI</h4>
+        <p>모델 구조를 바꾸기보다 학습 데이터의 품질·일관성·라벨링 체계를 개선해 성능을 끌어올리는 접근.</p>
+      </div>
+      <div>
+        <h4>비정형 데이터의 구조화</h4>
+        <p>웹·이미지·텍스트 등 정제되지 않은 데이터를 AI 학습 가능한 형태로 변환하는 파이프라인 설계.</p>
+      </div>
+      <div>
+        <h4>예측 신뢰도 보정 <span style="color:var(--faint);font-weight:400">Model Calibration</span></h4>
+        <p>모델이 내놓는 확률값이 실제 발생 빈도와 일치하도록 만드는 문제. 운수종사자 예측 팀 프로젝트에서 처음 접한 뒤 계속 관심을 두고 있는 주제.</p>
+      </div>
+      <!-- ──────────────────────────────────────────────────────────────
+           '예술·문화 데이터'는 지원하려는 특정 연구실의 주제여서 여기서 뺐습니다.
+           본인의 지속적 관심사가 아닌 것을 Research Interests에 올리면
+           다른 곳에 지원할 때 어긋나고, 면접에서 "왜 이 주제죠?"에 답하기 어렵습니다.
+
+           그 연구실에 지원할 때만 아래 문장을 추가하세요 —
+           지원 동기이지 연구 관심사가 아니라는 게 드러나게 씁니다.
+
+           <div>
+             <h4>예술·문화 데이터의 구조화</h4>
+             <p>정형화되지 않은 예술작품 데이터를 AI가 학습할 수 있는 형태로 만드는 문제.
+                위 세 가지 관심사를 적용해보고 싶은 구체적 대상입니다.</p>
+           </div>
+      ────────────────────────────────────────────────────────────── -->
+    </div>
+  </div>
+</section>
+
+<section id="featured">
+  <div class="wrap">
+    <h2>Featured Project</h2>
+    <div class="feat">
+      <span class="badge">데이콘 437팀 중 21위 · 상위 4.8%</span>
+      <h3>운수종사자 사고 위험군 예측 AI</h3>
+      <p>
+        94만 건 규모의 검사 데이터로 사고 위험군을 예측한 팀 프로젝트.
+        <strong>대용량 데이터 전처리 설계와 XGBoost 학습·제출 파이프라인</strong>을 담당했습니다.
+      </p>
+
+      <dl class="meta">
+        <dt>기간</dt>       <dd>2025.10.13 – 11.14 (대회 기간)</dd>
+        <dt>인원</dt>       <dd>팀 프로젝트 (4명)</dd>
+        <dt>담당 역할</dt>  <dd><strong>데이터 전처리 · 피처 인코딩 · EDA · XGBoost 학습/튜닝 · 제출 파이프라인</strong> 구현<br><span style="color:var(--muted)">누수 차단 · 확률 보정은 설계 논의에 참여 (구현: 팀원)</span></dd>
+        <dt>기술</dt>       <dd>Python · Pandas · XGBoost · Scikit-learn</dd>
+        <dt>코드</dt>       <dd><a href="https://github.com/PR-log/dacon-driver-risk-prediction" target="_blank" rel="noopener">github.com/PR-log/dacon-driver-risk-prediction</a></dd>
+      </dl>
+
+      <div class="step">
+        <span class="num">01 — 문제 정의</span>
+        <p>
+          이 대회의 평가지표는 다음과 같았습니다.
+        </p>
+        <p style="text-align:center;padding:14px;background:var(--accent-soft);border-radius:8px;color:var(--text);font-size:.95rem">
+          <code>Score = 0.5 × (1 − AUC) + 0.25 × Brier + 0.25 × ECE</code><br>
+          <span style="font-size:.85rem;color:var(--muted)">낮을수록 좋음</span>
+        </p>
+        <p>
+          주목할 점은 <strong>확률의 신뢰도를 재는 Brier Score와 ECE가 전체 점수의 50%를 차지</strong>한다는 것입니다.
+          위험군의 순위를 잘 매기는 것(AUC)만으로는 상위권에 갈 수 없고,
+          "이 사람의 사고 확률은 3%"라고 말했을 때 <strong>실제로 그 집단에서 3%가 사고를 내야</strong> 좋은 점수를 받는 구조였습니다.
+        </p>
+        <p>
+          그래서 이 프로젝트의 목표를 <strong>"분류 성능 극대화"가 아니라 "신뢰할 수 있는 확률 추정"</strong>으로 설정했습니다.
+          여기에 더해, 사고 위험군은 전체의 소수에 불과한 <strong>클래스 불균형</strong> 상태였고,
+          개인의 과거 이력을 변수로 사용하는 순간
+          <strong>미래 정보가 학습에 새어 들어가는 데이터 누수(Data Leakage)</strong> 위험이 컸습니다.
+        </p>
+      </div>
+
+      <div class="step">
+        <span class="num">02 — 데이터 설계 · 전처리 <span class="tag-mine">담당</span></span>
+        <div class="tbl-scroll">
+        <table style="margin-bottom:16px">
+          <thead><tr><th>데이터셋</th><th>규모</th><th>설명</th></tr></thead>
+          <tbody>
+            <tr><td>train_df</td><td>944,767 행</td><td>전체 검사 이력</td></tr>
+            <tr><td>train_A_detail</td><td>647,241 행 × 37 열</td><td>신규 검사 상세</td></tr>
+            <tr><td>train_B_detail</td><td>297,526 행 × 31 열</td><td>유지 검사 상세</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>
+          신규 검사와 유지 검사는 수집 항목과 분포가 달라 <strong>모델은 분리해 학습하되,
+          파생변수 생성은 통합</strong>했습니다. 한 사람의 이력이 두 테이블에 걸쳐 있어서,
+          합치지 않으면 과거 이력을 온전히 계산할 수 없기 때문입니다.
+        </p>
+        <p>
+          범주형 변수는 One-hot 인코딩, 날짜는 연·월로 분해해 시계열 특성을 확보했습니다.
+        </p>
+        <p>
+          과거 이력이 없는 대상은 <strong>−1로 대체</strong>했습니다.
+          단순한 결측 처리가 아니라, '이력 없음' 자체를 하나의 신호로 보존하기 위한 선택이었습니다.
+        </p>
+      </div>
+
+      <div class="step">
+        <span class="num">03 — 학습 최적화 · 제출 파이프라인 <span class="tag-mine">담당</span></span>
+        <p>
+          사고 위험군이 전체의 소수인 <strong>클래스 불균형</strong>을 보정하고,
+          XGBoost 하이퍼파라미터를 튜닝했습니다.
+        </p>
+        <p>
+          94만 건 규모에서는 학습 시간 자체가 병목이었습니다.
+          <code>tree_method='hist'</code>를 적용해 히스토그램 기반 분할로 바꾸면서
+          반복 실험이 가능한 수준까지 학습 효율을 끌어올렸습니다.
+        </p>
+        <p>
+          학습된 모델을 불러와 테스트 데이터에 동일한 전처리를 적용하고
+          제출 파일까지 생성하는 <strong>추론 파이프라인</strong>을 구성했습니다.
+          학습 때와 추론 때 피처 순서가 어긋나지 않도록 컬럼 목록을 저장해
+          <code>reindex</code>로 맞추는 방식을 썼습니다.
+        </p>
+      </div>
+
+      <div class="step">
+        <span class="num">04 — 팀과 함께 설계한 부분 <span class="tag-joint">설계 논의 참여</span></span>
+        <p>
+          아래 두 가지는 <strong>구현은 팀원이 맡았고, 저는 설계 논의에 참여</strong>했습니다.
+          이 프로젝트의 성패를 가른 판단들이라 함께 기록합니다.
+        </p>
+        <p>
+          <strong>데이터 누수 차단</strong> — 개인 ID 기준으로 과거 검사 횟수·위험 이력 파생변수를 만들 때,
+          단순 집계를 하면 예측 시점 이후의 정보가 섞입니다.
+          <code>groupby</code> + expanding window + <code>shift(1)</code> 조합으로
+          각 시점에서 그 이전까지의 정보만 누적되도록 통제했습니다.
+        </p>
+        <p>
+          <strong>확률 보정</strong> — 기본 모델은 위험 확률을 실제보다 높게 예측하는 과신 경향을 보였습니다.
+          <code>CalibratedClassifierCV(method='isotonic', cv='prefit')</code>로 보정했고,
+          Platt Scaling도 5-fold OOF 방식으로 함께 실험해 비교했습니다.
+        </p>
+        <div class="note">
+          <p><strong>여기서 배운 것</strong> — 구현은 제 손으로 하지 않았지만,
+          "왜 보정이 필요한가"를 팀과 함께 따지는 과정에서
+          <strong>분류 성능과 확률 신뢰도가 별개의 문제</strong>라는 것을 알게 됐습니다.
+          AUC가 같아도 확률값을 그대로 신뢰할 수 있는 모델과 없는 모델이 갈립니다.
+          이후 제가 모델을 만들 때 성능 지표만 보지 않게 된 계기였습니다.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="num">05 — 결과</span>
+        <p><strong>대회 공식 베이스라인과의 비교</strong></p>
+        <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>모델</th><th>접근</th><th>모델 A · AUC</th><th>모델 B · AUC</th></tr></thead>
+          <tbody>
+            <tr><td>공식 베이스라인</td><td>LightGBM · 검사 시퀀스 통계량</td><td>0.5108</td><td>0.4999</td></tr>
+            <tr><td><strong>팀 모델</strong></td><td>XGBoost · 개인 이력 파생변수</td><td><strong>0.7142</strong></td><td><strong>0.7070</strong></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="note">
+          <p><strong>무엇이 이 차이를 만들었나</strong><br>
+          공식 베이스라인은 개인 식별자(<code>PrimaryKey</code>)를 학습에서 제외하고
+          <strong>"이번 검사에서 어떤 수치가 나왔나"만</strong> 사용했습니다. 검사 결과 시퀀스의
+          평균·표준편차·비율을 정교하게 뽑았음에도 AUC가 0.5 — 거의 무작위 수준이었습니다.</p>
+          <p style="margin-top:10px">반면 개인 ID를 기준으로 <strong>과거 검사 이력</strong>을 파생변수로 만들자
+          AUC가 0.71까지 올랐습니다. 즉 이 문제에서는
+          <strong>"이 검사에서 뭐가 나왔나"보다 "이 사람이 과거에 어땠나"가 훨씬 강한 신호</strong>였습니다.
+          모델을 바꾼 것이 아니라 <strong>무엇을 변수로 볼 것인가</strong>를 바꾼 결과입니다.</p>
+          <p style="margin-top:10px;font-size:.85rem;color:var(--muted)">
+          ※ 두 수치는 검증 분할이 서로 다르므로 정밀한 비교는 아닙니다. 다만 격차가 커서 방향성은 분명합니다.</p>
+        </div>
+        <p style="margin-top:28px"><strong>최종 성능 (Isotonic 보정 후)</strong></p>
+        <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>모델</th><th>AUC ↑</th><th>Brier ↓</th><th>ECE ↓</th><th>Score ↓</th></tr></thead>
+          <tbody>
+            <tr><td>모델 A · 신규 검사</td><td>0.7142</td><td>0.0207</td><td>0.0005</td><td><strong>0.1482</strong></td></tr>
+            <tr><td>모델 B · 유지 검사</td><td>0.7070</td><td>0.0360</td><td>0.0023</td><td><strong>0.1561</strong></td></tr>
+          </tbody>
+        </table>
+        </div>
+
+        <p style="margin-top:24px"><strong>보정 방식 비교 — Isotonic vs Platt Scaling</strong></p>
+        <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>방식</th><th>모델</th><th>AUC</th><th>Brier</th><th>ECE</th><th>Score</th></tr></thead>
+          <tbody>
+            <tr><td>Isotonic (holdout)</td><td>A</td><td>0.7142</td><td>0.0207</td><td>0.0005</td><td>0.1482</td></tr>
+            <tr><td>Isotonic (holdout)</td><td>B</td><td>0.7070</td><td>0.0360</td><td>0.0023</td><td>0.1561</td></tr>
+            <tr><td>Platt (5-fold OOF)</td><td>A</td><td>0.7136</td><td>0.0208</td><td>0.0002</td><td>0.1484</td></tr>
+            <tr><td>Platt (5-fold OOF)</td><td>B</td><td>0.7126</td><td>0.0357</td><td>0.0018</td><td>0.1531</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="note">
+          <p><strong>이 비교표를 그대로 읽으면 안 됩니다</strong> — 두 방식의 <strong>검증 설계가 다릅니다.</strong>
+          Isotonic은 별도 홀드아웃, Platt은 5-fold OOF로 평가했기 때문에 공정한 비교가 아닙니다.
+          표만 보면 모델 B에서 Platt이 더 나아 보이지만(0.1531 vs 0.1561),
+          동일 조건에서 다시 비교해야 결론을 낼 수 있습니다.</p>
+        </div>
+        <p style="margin-top:24px">
+          변수 중요도 분석 결과 <strong>과거 위험 이력</strong>과 <strong>고연령대</strong> 변수가
+          예측에 가장 크게 기여했습니다.
+        </p>
+      </div>
+
+      <div class="step">
+        <span class="num">06 — 한계 및 개선점</span>
+        <p>
+          <strong>전처리 단계에서 검증 설계를 함께 보지 못함</strong> — 제가 담당한 전처리는
+          피처를 만드는 데 집중했고, train/validation 분할은 무작위로 두었습니다.
+          검사 시점 기준의 time-based split을 제안했다면 실제 운영 환경에 더 가까운 검증이
+          되었을 것입니다. 전처리 담당자가 검증 설계까지 함께 고민해야 한다는 걸 뒤늦게 알았습니다.
+        </p>
+        <p>
+          <strong>클래스 불균형 처리 비교 부재</strong> — 가중치 보정만 적용했고,
+          SMOTE 등 리샘플링 기법과의 비교 실험은 수행하지 못했습니다.
+        </p>
+        <p>
+          <strong>범주형 인코딩의 일관성</strong> — 추론 단계에서 <code>LabelEncoder</code>를
+          테스트 데이터에 다시 <code>fit</code>하는 구조라, 학습 때와 인코딩이 어긋날 여지가 있었습니다.
+          인코더를 저장해 재사용하는 방식이 옳았습니다.
+        </p>
+        <p>
+          <strong>보정 전 baseline을 남기지 않음</strong> — 코드가 보정 <em>후</em> 성능만 출력하도록
+          작성되어 있어, <strong>보정으로 무엇이 얼마나 좋아졌는지 정량화할 수 없습니다.</strong>
+          비교 대상을 먼저 기록해두는 것이 실험의 기본인데 그 습관이 없었습니다.
+          이후로는 어떤 처리를 적용하기 전에 baseline부터 남깁니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Other Projects</h2>
+    <div class="cards">
+
+      <div class="card">
+        <h4>YOLOv8 차량 번호판 인식 · 출입 관리 시스템 <span class="tag-solo">개인 프로젝트</span></h4>
+        <p>
+          영상에서 차량을 추적하고, 번호판을 읽고, 진입/진출을 판정하는 End-to-End 파이프라인입니다.
+        </p>
+        <p style="padding:14px;background:var(--accent-soft);border-radius:8px;color:var(--text);font-size:.9rem">
+          차량 탐지 + <strong>추적</strong>(car_id 부여) → 번호판 탐지 →
+          <strong>최적 프레임 선택</strong> → OCR → <strong>진입/진출 판정</strong>
+        </p>
+        <p>
+          <span class="k">핵심 판단 — 어느 프레임을 읽을 것인가</span><br>
+          차량 한 대가 수십 프레임에 걸쳐 등장하는데, 흔들림과 각도 때문에 프레임마다 품질이 크게 다릅니다.
+          그래서 차량별로 <strong>선명도 점수(blur score)를 계산해 가장 선명한 프레임 하나만</strong> OCR에 넘기도록 했습니다.
+          <strong>"많이 읽기"가 아니라 "잘 읽힐 것만 읽기"</strong>로 접근을 바꾼 것이 이 설계의 요점입니다.
+        </p>
+        <p>
+          Pascal VOC(XML) 라벨 433장을 YOLO 포맷으로 변환하는 스크립트를 작성해 <code>licence</code> 단일 클래스로 학습했고,
+          번호판의 이동 방향으로 ENTER / EXIT을 판정해 시각과 함께 기록했습니다.
+        </p>
+        <div class="note">
+          <p><strong>한계 — OCR이 병목입니다</strong><br>
+          탐지·추적·프레임 선택까지는 안정적이지만, 최종 문자 인식 신뢰도가 <strong>0.1~0.7로 낮고
+          판독 결과가 실제 번호판과 어긋나는 경우가 많습니다.</strong>
+          원거리 크롭의 해상도 부족, 번호판 서체에 특화되지 않은 범용 OCR 사용,
+          기울기 보정·이진화 같은 전처리 부재가 원인이라고 봅니다.
+          문자를 별도 탐지 클래스로 학습하거나 크롭 단계에 super-resolution을 넣는 것이 우선이라고 생각합니다.</p>
+        </div>
+        <div class="tags"><span class="tag">YOLOv8</span><span class="tag">Object Tracking</span><span class="tag">OCR</span><span class="tag">Ubuntu</span><span class="tag">CUDA</span></div>
+        <p><a href="https://github.com/PR-log/yolov8-license-plate" target="_blank" rel="noopener">github.com/PR-log/yolov8-license-plate</a></p>
+      </div>
+
+      <div class="card">
+        <h4>VisDrone 항공 영상 사람 탐지 <span class="tag-solo">개인 프로젝트</span></h4>
+        <p>
+          영상처리 수업 프로젝트. 과제 조건은 <em>"주어진 이미지를 인식하는 모델을 만들 것"</em> 뿐이었고,
+          <strong>데이터셋 선정 · 클래스 재설계 · 모델 선택 · 학습 전략을 모두 직접 결정</strong>했습니다.
+        </p>
+        <p>
+          <span class="k">클래스 재설계</span> — VisDrone2019-DET의 10개 클래스 중
+          <code>pedestrian</code>(보행 중)과 <code>people</code>(그 외 자세)을 <strong>하나의 <code>person</code> 클래스로 병합</strong>했습니다.
+          자세 차이만으로 라벨이 갈리면 학습이 불안정해지고, 목적상 구분할 이유도 없다고 판단했습니다.
+        </p>
+        <p>
+          <span class="k">해상도 판단</span> — 항공 영상의 사람은 화면에서 매우 작게 나타납니다.
+          기본값 640에서는 다운샘플링 과정에 특징이 사라진다고 보고 <strong>imgsz를 960으로 올려</strong> 학습했습니다.
+          멀티 GPU, 100 에폭, 약 4.9시간이 소요됐습니다.
+        </p>
+        <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>실험</th><th>클래스</th><th>에폭</th><th>mAP50</th><th>mAP50-95</th><th>Precision</th><th>Recall</th></tr></thead>
+          <tbody>
+            <tr><td>train</td><td>10클래스</td><td>1</td><td>0.238</td><td>0.136</td><td>—</td><td>—</td></tr>
+            <tr><td>train2</td><td>person</td><td>27</td><td>0.731</td><td>0.445</td><td>0.808</td><td>0.631</td></tr>
+            <tr><td><strong>train3</strong></td><td>person</td><td><strong>100</strong></td><td><strong>0.755</strong></td><td><strong>0.464</strong></td><td><strong>0.826</strong></td><td><strong>0.655</strong></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="note">
+          <p><strong>무엇이 성능을 올렸나</strong> — 클래스를 사람 단일로 좁힌 것만으로 mAP50이
+          0.238 → 0.731로 올랐습니다. 이후 에폭을 27에서 100까지 늘린 구간의 상승폭은 +0.024에 그쳐,
+          <strong>모델을 더 오래 돌리는 것보다 문제 정의를 바로잡는 쪽이 훨씬 효과적</strong>이었습니다.</p>
+        </div>
+        <p style="margin-top:16px">
+          <em>한계 —</em> Recall 0.655로 정밀도(0.826)에 비해 낮아 밀집 장면에서 놓치는 사람이 있습니다.
+          VisDrone의 핵심 난점인 객체 크기별 성능 분해는 하지 못했고, 960 해상도의 효과를 640과 정량 비교하지 않았습니다.
+          C2f를 YOLO11의 C3k2로 교체하는 아키텍처 실험도 시도했으나 <strong>GPU 전원 문제로 중단</strong>되어 지표를 얻지 못했습니다.
+        </p>
+        <p><a href="https://github.com/PR-log/visdrone-person-detection" target="_blank" rel="noopener">github.com/PR-log/visdrone-person-detection</a></p>
+        <div class="tags"><span class="tag">YOLOv8</span><span class="tag">VisDrone</span><span class="tag">Multi-GPU</span><span class="tag">Ubuntu</span><span class="tag">Docker</span></div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────────────
+           재난문자 수집 프로젝트는 일단 제외했습니다.
+           로컬에 있는 코드(python deep/0403.ipynb)가 미완성 수업 실습이라
+           지금 상태로 올리면 과장이 됩니다.
+
+           나중에 크롤러를 실제 동작하는 수준으로 완성하면 이 카드를 되살리세요.
+           그때는 Skills의 Selenium도 '프로젝트 적용'에 그대로 두면 됩니다.
+           완성하지 않기로 하면 Selenium을 '이론 학습 + 실습' 쪽으로 옮기고,
+           About 문단의 "Selenium으로 동적 웹의 비정형 데이터를 직접 수집하고"도
+           함께 손봐야 합니다.
+      ────────────────────────────────────────────────────────────── -->
+
+      <div class="card">
+        <h4>한우 도체 등급 예측 <span class="tag-teamproj">팀 프로젝트 · 4명</span></h4>
+        <p>
+          <strong>240만 건</strong>의 한우 사육 이력으로 최종 도체 등급(<code>LAST_GRADE</code>, 16개 클래스)을
+          예측하는 다중 분류 모델입니다. 기상·농장면적·혈통·폐사 데이터를 결합했습니다.
+        </p>
+        <p style="padding:12px 16px;background:var(--accent-soft);border-radius:8px;font-size:.92rem;color:var(--text)">
+          <strong>담당</strong> — EDA · 평가지표 선정 · 변수 설정 · 하이퍼파라미터 최적화,
+          그리고 <strong>팀 전체의 분석 방향 조율을 주도</strong>했습니다.
+        </p>
+        <div class="tbl-scroll">
+        <table style="margin-bottom:16px">
+          <thead><tr><th>데이터</th><th>규모</th><th>커버리지</th></tr></thead>
+          <tbody>
+            <tr><td>사육 이력 (학습)</td><td>2,408,699 행 × 23 열</td><td>2023–2025</td></tr>
+            <tr><td>기상 관측</td><td>973,248 행 · 444개 지점</td><td>2020–2025</td></tr>
+            <tr><td>농장 면적·사육두수</td><td>—</td><td>98.45%</td></tr>
+            <tr><td>혈통</td><td>—</td><td>61.69%</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>
+          <span class="k">평가지표 선정</span> — 16개 클래스가 심하게 불균형했습니다
+          (희소 클래스 <code>등외</code> 5,540행, <code>3C</code> 23,542행).
+          다수 클래스만 맞혀도 높게 나오는 Accuracy 대신 <strong>Macro-F1</strong>을 기준으로 잡아,
+          희소 등급의 성능이 지표에 그대로 드러나도록 했습니다.
+        </p>
+        <p>
+          <span class="k">팀에서 찾은 것 — 성별 분리는 조건부로만 유효했다</span><br>
+          성별로 모델을 나누면 전체 Macro-F1이 <strong>0.9283 → 0.9459</strong>로 올랐습니다.
+          그런데 성별로 뜯어보니 결과가 갈렸습니다.
+        </p>
+        <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>성별</th><th>통합 모델</th><th>분리 모델</th><th>변화</th></tr></thead>
+          <tbody>
+            <tr><td>암</td><td>0.9317</td><td>0.9393</td><td>+0.008</td></tr>
+            <tr><td>거세</td><td>0.8756</td><td>0.9203</td><td><strong>+0.045</strong></td></tr>
+            <tr><td>수</td><td>0.8383</td><td>0.7551</td><td><strong>−0.083</strong></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="note">
+          <p><strong>'수'만 성능이 떨어진 이유</strong> — 표본이 11,820행으로 다른 두 그룹에 비해 크게 작았습니다.
+          분리하는 순간 학습 데이터가 부족해져 오히려 나빠진 것입니다.
+          그래서 팀은 <strong>암·거세는 분리 모델, 수는 통합 모델을 쓰는 하이브리드 전략</strong>을 택했습니다.
+          좋아 보이는 기법도 <strong>모든 구간에 일괄 적용하면 안 된다</strong>는 걸 숫자로 확인한 사례입니다.</p>
+        </div>
+        <p style="margin-top:16px">
+          v1부터 v8까지 반복 개선하며 클래스 가중치, 성별 분리, 외부 데이터 결합을 단계적으로 실험했습니다.
+        </p>
+        <p><a href="https://github.com/PR-log/data_mining_team_project" target="_blank" rel="noopener">GitHub — data_mining_team_project</a></p>
+        <div class="tags"><span class="tag">LightGBM</span><span class="tag">Multi-class</span><span class="tag">Macro-F1</span><span class="tag">Pandas</span></div>
+      </div>
+
+      <div class="card">
+        <h4>NBA 이주의 선수 예측 <span class="tag-solo">개인 프로젝트</span></h4>
+        <p>
+          NBA "이주의 선수(Player of the Week)"를 예측하는 문제.
+          <strong>농구 지식이 거의 없는 상태에서 시작</strong>했기 때문에, 오히려
+          도메인 지식 없이 지표만으로 선정 기준을 역추론할 수 있는지를 목표로 잡았습니다.
+        </p>
+        <p>
+          <span class="k">가설</span> — 이주의 선수는 모두 평균 득점 상위권이라는 관찰에서 출발해,
+          <em>"득점 + 팀 승리 + 경기 영향력"</em>이 선정 기준일 것이라는 가설을 세우고
+          W, GP, PTS, REB, AST, FP, +/− 를 변수로 선정했습니다.
+        </p>
+        <p>
+          <span class="k">모델 선택 과정</span> — 로지스틱 회귀로 시작해 상위 2~5위 내 예측에 성공했습니다.
+          성능을 더 높이려 XGBoost를 적용했으나 <strong>데이터를 늘릴수록 성능이 하락</strong>했고,
+          표본이 적어 생긴 과적합으로 판단해 파라미터를 조정했지만 개선되지 않았습니다.
+          <strong>결국 단순한 모델로 되돌아왔습니다.</strong>
+        </p>
+        <p>
+          <span class="k">분포 차이 발견</span> — 초기 정확도 문제가 모델 탓이 아니라
+          동부·서부 데이터 분포 차이 때문일 가능성을 의심해 컨퍼런스를 분리 학습했고,
+          그 결과 양쪽 모두에서 정확한 예측이 가능해졌습니다.
+        </p>
+        <div class="note">
+          <p><strong>실패 분석</strong> — 서부 예측이 빗나갔습니다. 나중에 같은 사이트에서
+          데이터를 다시 받아 모델을 돌리니 정답(르브론 제임스)이 1위로 나왔습니다.
+          <strong>예측 등록 직전에 실행했는데 그 시점까지 당일 경기 기록이 사이트에 반영되지 않았던 것</strong>이
+          원인이었습니다. 모델이 아니라 <strong>데이터 수집 시점</strong>의 문제였습니다.</p>
+          <p style="margin-top:10px">동부에서는 모델이 Brandon Ingram을 가장 많이 지목했는데,
+          주변 조언을 듣고 다른 선수로 바꿔 제출해 틀렸습니다. 실제 정답은 Brandon Ingram이었습니다.
+          <strong>근거 있는 예측을 스스로 신뢰하지 못한 것</strong>이 가장 큰 아쉬움입니다.</p>
+        </div>
+        <p style="margin-top:16px">
+          <span class="k">해석</span> — SHAP waterfall plot으로 변수 기여도를 분석했습니다.
+          FP(판타지 포인트)가 +1.23으로 가장 크게 기여했고, +/−(+0.45)와 승리 수(+0.37)가 뒤를 이어,
+          모델이 개별 기록뿐 아니라 <strong>팀 성과와 경기 영향력을 함께 반영</strong>하고 있음을 확인했습니다.
+        </p>
+        <p>
+          <em>결론 —</em> 단순 모델도 충분히 강력하다는 것, 데이터 분리가 모델 선택보다 중요할 수 있다는 것,
+          그리고 모델 이전에 데이터 전처리와 <strong>수집 시점</strong>이 결과를 좌우한다는 것.
+        </p>
+        <div class="tags"><span class="tag">R</span><span class="tag">Logistic Regression</span><span class="tag">XGBoost</span><span class="tag">SHAP</span><span class="tag">dplyr</span></div>
+      </div>
+
+      <div class="card">
+        <h4>NBA 우승 예측 모델 <span class="tag-teamproj">팀 프로젝트 · 5명</span></h4>
+        <p>
+          오픈데이터분석 수업 팀 프로젝트. 경기 예측 모델을 개발하고 고도화했으며,
+          동·서부 컨퍼런스별 분석과 팀 단위 심층 분석 보고서를 작성했습니다.
+          Stacked ensemble·SVM 기반 NBA 예측 선행 연구 3편을 참고했습니다.
+        </p>
+        <p>
+          <span class="k">담당</span> — EDA, 분석 방향 설계, 앙상블 구성 모델 중 하나의 개발을 맡았습니다.
+        </p>
+        <p><a href="https://github.com/PR-log/op_data" target="_blank" rel="noopener">GitHub — op_data</a></p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">R</span><span class="tag">Pandas</span></div>
+      </div>
+
+      <div class="card">
+        <h4>가짜 음성 탐지 모델 분석 <span class="tag-solo">개인 · 분석 보고서</span></h4>
+        <p style="font-size:.88rem;color:var(--faint);margin-bottom:14px">
+          ※ 직접 구현한 모델이 아니라, 공개된 Kaggle 노트북(Conformer 기반)을 실행·시연하고
+          <strong>모델 선택의 타당성과 한계를 분석</strong>한 보고서입니다.
+        </p>
+        <p>
+          <span class="k">왜 Conformer였나</span> — 스펙트로그램은 이미지 형태지만 내용은 음성입니다.
+          ImageNet 사전학습 모델은 음성 특유의 시간–주파수 패턴에 약하므로,
+          <strong>도메인이 맞는 전이학습</strong>(LibriSpeech로 사전학습된 ASR 인코더)이 타당하다고 분석했습니다.
+          CNN이 합성 음성의 국소 아티팩트를, Self-Attention이 발화 전체 문맥을 잡습니다.
+        </p>
+        <div class="note">
+          <p><strong>핵심 발견 — 일반화 격차</strong><br>
+          Valid F1 <strong>99.8%</strong> → Test F1 <strong>61.2%</strong>.
+          원인은 ASVspoof 데이터셋 구조에 있었습니다. Valid는 학습과 <em>같은</em> 위조 시스템(A01~A06),
+          Test는 <em>본 적 없는</em> 위조 시스템(A07~A19)으로 구성됩니다.
+          학습한 합성 방식에는 강하지만 새로운 공격에는 취약하다는 뜻입니다.</p>
+          <p style="margin-top:10px">더 중요한 건 <strong>오류의 종류</strong>입니다.
+          Test에서 Precision 100%, Recall 44% — 오탐은 0이지만 <strong>실제 가짜의 56%를 놓칩니다.</strong>
+          보안 관점에서 "가짜를 진짜로 통과시키는" 가장 위험한 오류가 많다는 의미입니다.</p>
+        </div>
+        <p style="margin-top:16px">
+          <span class="k">평가지표 비판</span> — 이 노트북은 Accuracy·F1로 평가하지만,
+          ASVspoof의 공식 지표는 <strong>EER과 min t-DCF</strong>입니다. 타 연구와 비교하려면 공식 지표를 써야 합니다.
+        </p>
+        <p>
+          <em>개선 제안 —</em> RawBoost 등 안티스푸핑 전용 증강 활성화, 고정 Mel-Spectrogram 대신
+          원형 파형을 직접 다루는 RawNet2 / AASIST 또는 wav2vec2 / WavLM 자기지도 표현으로 프론트엔드 교체.
+        </p>
+        <div class="tags"><span class="tag">Conformer</span><span class="tag">Speech</span><span class="tag">Transfer Learning</span><span class="tag">ASVspoof</span><span class="tag">TensorFlow</span></div>
+      </div>
+
+      <div class="card">
+        <h4>기타 분석 경험</h4>
+        <p>
+          <span class="k">Open API 자동 수집</span> — requests로 호출해 XML을 받고 xmltodict로 파싱해 CSV로 자동 저장하는 파이프라인<br>
+          <span class="k">전국 상권 데이터 분석</span> — 소상공인시장진흥공단 17개 시도 CSV 통합, groupby·pivot_table 다차원 집계, Folium 지도 시각화 <span style="color:var(--faint)">(2학년 2학기 수업 실습)</span><br>
+          <span class="k">R 기반 통계 분석</span> — Boxplot 결측 처리, dplyr 가공, ggplot 시각화, 잔차분석<br>
+          <span class="k">선형모형 프로젝트</span> — SNS 상향비교와 자기효능감 분석<br>
+          <span class="k">세계 행복지수 분석</span> — 다각도 필터링, 평균 대체 결측 처리, 이상치 제거<br>
+          <span class="k">미세먼지 데이터 시각화</span>
+        </p>
+        <!-- 참고: 상권 분석은 2학년 2학기 수업 실습이고 본인이 잘 기억하지 못하는 항목입니다.
+             면접에서 설명하기 어렵다고 판단되면 위 목록에서 그 줄을 지우세요.
+             MAI 경진대회는 참가하지 않아 제외했습니다. -->
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+
+    <div class="skill-group">
+      <div class="skill-label">프로젝트에 실제 적용 <span>· Applied in projects</span></div>
+      <div class="skill-row"><span class="cat">Language</span><span>Python, R</span></div>
+      <div class="skill-row"><span class="cat">데이터 처리</span><span>Pandas (merge / concat / groupby / pivot_table, 결측·중복·이상치 처리), NumPy, dplyr</span></div>
+      <div class="skill-row"><span class="cat">데이터 수집</span><span>Selenium (WebDriver, XPath, 탭·세션 관리), BeautifulSoup, requests, Open API, xmltodict</span></div>
+      <div class="skill-row"><span class="cat">시각화</span><span>Matplotlib, ggplot2 — bar, pie, histogram, KDE, boxplot, scatter</span></div>
+      <div class="skill-row"><span class="cat">통계</span><span>SciPy, Statsmodels — t-test, ANOVA, Tukey HSD, 단순·다중회귀, 잔차분석</span></div>
+      <div class="skill-row"><span class="cat">머신러닝</span><span>XGBoost (하이퍼파라미터 튜닝, 클래스 불균형 보정, <code>tree_method='hist'</code>), Bagging, Soft Voting, StandardScaler</span></div>
+      <div class="skill-row"><span class="cat">딥러닝 · CV</span><span>YOLOv8</span></div>
+      <div class="skill-row"><span class="cat">환경</span><span>Ubuntu Linux, conda, CUDA, cuDNN, Git / GitHub, Jupyter</span></div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-label">이론 학습 + 실습 <span>· Studied</span></div>
+      <div class="skill-row"><span class="cat">분류 모델</span><span>KNN, Naive Bayes, Decision Tree, SVM</span></div>
+      <div class="skill-row"><span class="cat">확률 보정</span><span>Isotonic Regression, Platt Scaling, Brier Score, ECE — 팀 프로젝트에서 설계 논의에 참여하며 학습 (구현 경험은 없음)</span></div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-label">학습 중 <span>· Currently learning</span></div>
+      <div class="skill-row"><span class="cat">딥러닝</span><span>PyTorch — YOLO·Conformer를 다뤄본 경험을 프레임워크 수준에서 직접 구현할 수 있도록 학습 중</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <h2>Education</h2>
+    <div class="edu-item">
+      <p class="t">한남대학교 빅데이터응용학과 · 3학년 재학</p>
+      <p>학번 20222505</p>
+    </div>
+    <div class="edu-item">
+      <p class="t">주요 수강 과목</p>
+      <p>
+        <strong>통계</strong> — 통계분석, 선형모형, 데이터탐색<br>
+        <strong>머신러닝 · AI</strong> — 머신러닝, 데이터마이닝, 영상처리<br>
+        <strong>데이터 엔지니어링</strong> — 빅데이터 분석 및 시각화, 오픈데이터분석
+      </p>
+    </div>
+    <div class="edu-item">
+      <p class="t">AI 첨단산업 인재양성 부트캠프 <span style="font-weight:400;color:var(--faint)">· 한남대학교</span></p>
+      <p>
+        대학·기업 공동 운영 과정. 정규 학기 중 팀티칭·세미나로 이론과 기초 실습을 다루는 <strong>교과형</strong>과,
+        방학 중 8주간 팀 프로젝트·PBL·멘토링 중심으로 운영되는 <strong>몰입형</strong>으로 구성됩니다.
+      </p>
+      <p style="margin-top:8px">
+        <strong>B1 · AI 데이터과학 응용</strong> — 가짜 음성 탐지 모델 분석 (Conformer)<br>
+        <strong>B3 · AI 특강</strong> — 전기차 데이터 활용 AI 실습, 관련 논문 3편 검토
+      </p>
+      <p style="margin-top:8px;color:var(--faint);font-size:.88rem">2026년 여름 · B1 6–7월, B3 8월</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="links" style="justify-content:center">
+      <a href="https://github.com/PR-log" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:jeeheen1@gmail.com">jeeheen1@gmail.com</a>
+    </div>
+    <p style="margin-top:24px">© 2026 지호연</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var btn  = document.getElementById('themeBtn');
+  var saved = null;
+  try { saved = localStorage.getItem('theme'); } catch(e){}
+  if (saved) root.setAttribute('data-theme', saved);
+
+  btn.addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) {
+      cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch(e){}
+  });
+})();
+</script>
+
+</body>
+</html>
