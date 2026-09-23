@@ -714,7 +714,7 @@ figcaption{font-size:.8rem;color:var(--muted);margin-top:8px;line-height:1.5}
       <div class="hero-art" aria-hidden="true">
         <figure class="ha ha-1">
           <img src="assets/visdrone-post.webp" alt="" width="1013" height="332">
-          <figcaption>VisDrone 객체 탐지 · 개인</figcaption>
+          <figcaption>VisDrone 사람 탐지 · 개인</figcaption>
         </figure>
         <figure class="ha ha-2">
           <img src="assets/plate-result.webp" alt="" width="1400" height="788">
@@ -905,13 +905,13 @@ figcaption{font-size:.8rem;color:var(--muted);margin-top:8px;line-height:1.5}
         <div class="pcard-media"><img src="assets/visdrone-post.webp" alt="위에서 내려다본 보행자들을 탐지한 결과" width="1013" height="332" loading="lazy"></div>
         <div class="pcard-body">
           <div class="badges"><span class="b b-solo">개인</span><span class="b">영상처리 수업 과제</span></div>
-          <h3>VisDrone 항공 영상 객체 탐지</h3>
+          <h3>VisDrone 항공 영상 사람 탐지</h3>
           <p>과제 이미지 인식을 위해 데이터셋·해상도·학습 전략을 직접 정하고, GPU 2장으로 100 에폭 학습.</p>
           <ul class="tags"><li>YOLOv8</li><li>VisDrone</li><li>Multi-GPU</li></ul>
           <div class="kpi"><span class="kpi-v">0.755</span><span class="kpi-l">mAP50 · 클래스 구분 없는 단일 클래스 기준</span></div>
           <span class="more">자세히 보기 <svg class="ic"><use href="#i-arrow"/></svg></span>
         </div>
-        <button class="pcard-hit" type="button" data-open="p-visdrone"><span class="sr">VisDrone 항공 영상 객체 탐지 상세 보기</span></button>
+        <button class="pcard-hit" type="button" data-open="p-visdrone"><span class="sr">VisDrone 항공 영상 사람 탐지 상세 보기</span></button>
       </article>
 
       <!-- Hanwoo -->
@@ -1385,8 +1385,8 @@ figcaption{font-size:.8rem;color:var(--muted);margin-top:8px;line-height:1.5}
 <dialog class="pd" id="p-visdrone" aria-labelledby="p-visdrone-t">
   <header class="pd-head">
     <div class="badges"><span class="b b-solo">개인</span><span class="b">영상처리 수업 과제</span></div>
-    <h2 id="p-visdrone-t">VisDrone 항공 영상 객체 탐지</h2>
-    <p>"주어진 이미지를 인식하는 모델을 만들 것"이라는 과제에서, 데이터셋·모델·학습 전략을 직접 정해 멀티 GPU로 학습했습니다.</p>
+    <h2 id="p-visdrone-t">VisDrone 항공 영상 사람 탐지</h2>
+    <p>"주어진 이미지를 인식하는 모델을 만들 것"이라는 과제에서, 데이터셋·모델·학습 전략을 직접 정해 멀티 GPU로 학습했습니다. 다만 학습 라벨에 차량까지 포함되어 <strong>아래 성능 수치는 전체 객체 기준</strong>입니다 (→ 04).</p>
     <button class="icon-btn pd-close" type="button" data-close aria-label="닫기"><svg class="ic"><use href="#i-close"/></svg></button>
   </header>
   <div class="pd-body">

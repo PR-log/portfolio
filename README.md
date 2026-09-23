@@ -12,7 +12,7 @@
 |---|---|---|
 | 운수종사자 사고 위험군 예측 (데이콘 437팀 중 21위) | 팀 4명 | [dacon-driver-risk-prediction](https://github.com/PR-log/dacon-driver-risk-prediction) |
 | 차량 번호판 인식 · 출입 관리 시스템 | 개인 | [yolov8-license-plate](https://github.com/PR-log/yolov8-license-plate) |
-| VisDrone 항공 영상 객체 탐지 | 개인 | [visdrone-object-detection](https://github.com/PR-log/visdrone-object-detection) |
+| VisDrone 항공 영상 사람 탐지 | 개인 | [visdrone-object-detection](https://github.com/PR-log/visdrone-object-detection) |
 | 한우 도체 등급 예측 | 팀 4명 | [data_mining_team_project](https://github.com/PR-log/data_mining_team_project) |
 | NBA 우승 예측 모델 | 팀 5명 | [op_data](https://github.com/PR-log/op_data) |
 
